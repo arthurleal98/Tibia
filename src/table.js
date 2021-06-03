@@ -7,10 +7,10 @@ const Table = (props)=>{
     const [type,setType] = useState(['rank',0]);
     const [labelstable, setLabelstable] = useState([]);
     const [contentTable,setContentTable] = useState([]);
-    const [columns,setColumns] = useState(["name"]);
     const [nameServer, setNameServer] = useState('');
     const [options,setOptions] = useState([]);
-    const [serachName, setSearchName] = useState();
+    const [loading,setLoading] = useState(true);
+
     useEffect(()=>{
         const sorting=(element)=>{
                 if(element===type[0]){
@@ -24,49 +24,84 @@ const Table = (props)=>{
                     setType([element,0]);
                 }
             }
-        const styleButton = {
-            width:'100%'
-        }
+       
         const fetchApi=async()=>{
-            const response = await fetch('https://api.tibiadata.com/v2/worlds.json');
-            const data2 = await response.json();
-            const dados = data2.worlds.allworlds;
-            let arr = [];
-            dados.forEach(element=>{
-                arr.push(element['name'])
-            })
-            let option_c = [];
-            option_c.push(<option key={"null_option_page2"} value=" ">Escolha o server</option>)
-            arr.forEach(element=>{
-                option_c.push(<option key={`null_option_page2`} value={element}>{element}</option>)
-            })
-            setOptions(option_c);
-                  const  teste = props.data; 
-                   const data = teste.slice(pagination-50,pagination);
-                   const label = Object.keys(data[0]);
-                
-                setNameServer(data[0][label[2]]);
-                delete label[2];
-                const pip = quickSort(data,0,49,type[0],type[1]);
-                console.log(pip)
-                const arrayLabels = [];
-                label.forEach(element => {
-                    arrayLabels.push(<th key={`table_button_${element}_page2`}><button style={styleButton} onClick={()=>{sorting(element)}}>{element}</button></th>)
-                });
-                setLabelstable(<tr key={'table_button_header_page2'}>{arrayLabels}</tr>);
-                const arrayContent = [];
-                pip.forEach(element=>{
-                    let arr = [];
-                    label.forEach(element2=>{
-                        arr.push(<td>{element[element2]}</td>)
-                    })
-                    arrayContent.push(<tr>{arr}</tr>);
-                });
-                setContentTable(arrayContent);      
+            try{
+                const response = await fetch('https://api.tibiadata.com/v2/worlds.json');
+                const data2 = await response.json();
+                const colorTr = {
+                    backgroundColor:' #e1e7f0'
+
+                }
+                const styleThead={
+                    backgroundColor:'#03256c',
+                    padding:'20px 40px 20px 40px',
+                    color:'white',
+                    fontSize:'20px',
+                    paddingLeft:100,
+                    paddingRight:100
+
+                }
+                const colorTr2 = {
+                    backgroundColor:' #c1cfe3',
+                }
+                const styleTd = {
+                    padding:12
+                }
+                const dados = data2.worlds.allworlds;
+                let arr = [];
+                dados.forEach(element=>{
+                    arr.push(element['name'])
+                })
+                let option_c = [];
+                option_c.push(<option key={"null_option_page2_"} value=" ">Escolha o server</option>)
+                arr.forEach(element=>{
+                    option_c.push(<option key={`null_option_page2_${element}`} value={element}>{element}</option>)
+                })
+                setOptions(option_c);
+                    const  teste = props.data; 
+                    const data = teste.slice(pagination-50,pagination);
+                    const label = Object.keys(data[0]);
+                    
+                    setNameServer(data[0][label[2]]);
+                    delete label[2];
+                    const pip = quickSort(data,0,49,type[0],type[1]);
+                    let r = pip['rank'];
+                    console.log(pip[0])
+                    const arrayLabels = [];
+                    label.forEach(element => {
+                        arrayLabels.push(<th key={`table_button_${element}_page2`} style={styleThead}  onClick={()=>{sorting(element)}}>{element}</th>)
+                    });
+                    setLabelstable(<tr key={'table_button_header_page2'}>{arrayLabels}</tr>);
+                    const arrayContent = [];
+                    pip.forEach((element,index)=>{
+                        let arr = [];
+                        label.forEach(element2=>{
+                            arr.push(<td key={`${element}_${index}_${element2}`} style={styleTd}>{element[element2]}</td>)
+                        })
+                        if( index ===0){
+                            arrayContent.push(<tr style={colorTr} key={`${element}_${index}`}>{arr}</tr>);
+                        }
+                        else if (index%2!==0){
+                            arrayContent.push(<tr style={colorTr2} key={`${element}_${index}`}>{arr}</tr>);
+                        }
+                        else{
+                            arrayContent.push(<tr style ={colorTr} key={`${element}_${index}`}>{arr}</tr>);
+                        }
+                    });
+                    setContentTable(arrayContent);   
+            }
+            catch(e){
+                console.log(e)
+            }
+            finally{
+                setLoading(false)
+            }
+                   
             }
              
             fetchApi();
-        },[pagination,type,props.data,columns]); 
+        },[pagination,type,props.data]); 
             
             
      
@@ -75,7 +110,6 @@ const Table = (props)=>{
         if(value<props.index){
             setPagination(value+50);
         }
-        console.log(pagination)
 
         
     }
@@ -106,10 +140,28 @@ const Table = (props)=>{
         marginTop:30
 
     }
-    
+    const stylePag ={
+       justifyContent:'center',
+       marginTop:20
+    }
+    const styleLoading = {
+        display:'flex',
+        marginLeft:'auto',
+        marginRight:'auto',
+        marginTop:'100px'
+    }
+    if(loading){
+            
+        
+        return(		
+            
+            <div className="lds-ring" style={styleLoading}><div></div><div></div><div></div><div></div></div>
+            
+            )}
+    else{    
         return(
             <div style={styleMain}>
-                
+                    
                     <h1 style={styleH}>{nameServer}</h1>
                     <form action='/Server' method='get' style={styleForm}>
                         <label>Escolha o server: </label>
@@ -118,12 +170,12 @@ const Table = (props)=>{
                             
                         </select>
                         
-                        <button id='submit'>asdasd</button>
+                        <button id='submit' className='btn btn-primary'>Ir</button>
                     </form>
                     
                 <div id='div_table_players'>
                     <table style={styleTable}>
-                        <thead>
+                        <thead >
                             {labelstable}
                         </thead>
                         <tbody>
@@ -132,24 +184,23 @@ const Table = (props)=>{
                         </tbody>
                     </table>
                 </div>
-                <nav aria-label="Page navigation example">
-  <ul class="pagination">
-  <li class="page-item"><button className='page-link'onClick={()=>{setPagination(50)}} >Initial</button></li>
+                <div style={stylePag} >
+                    <ul className="pagination"style={stylePag} >
+                    <li className="page-item"><button className='page-link'onClick={()=>{setPagination(50)}} >Initial</button></li>
 
-    <li class="page-item"><button className='page-link'onClick={()=>{indexLess()}} >Previous</button></li>
-    <li class="page-item"><button className='page-link' >1</button></li>
-    <li class="page-item"><button className='page-link'>2</button></li>
-    <li class="page-item"><button className='page-link'>3</button></li>
-    <li class="page-item"><button className='page-link'onClick={()=>{indexPlus()}} >Next</button></li>
-    <li class="page-item"><button className='page-link'onClick={()=>{setPagination(props.index+1)}} >End</button></li>
+                        <li className="page-item"><button className='page-link'onClick={()=>{indexLess()}} >Previous</button></li>
+                        
+                        <li className="page-item"><button className='page-link'onClick={()=>{indexPlus()}} >Next</button></li>
+                        <li className="page-item"><button className='page-link'onClick={()=>{setPagination(props.index+1)}} >End</button></li>
 
-  </ul>
-</nav>
+                    </ul>
+                </div>
                 
 
 
             </div>
         )
+        }
     
 }
 export default Table;

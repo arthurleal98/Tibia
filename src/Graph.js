@@ -109,10 +109,16 @@ const Graph = (props)=>{
 		const labelstyle={
 			margin:20
 		}
+		const styleLoading = {
+			display:'flex',
+			marginLeft:'auto',
+			marginRight:'auto',
+			marginTop:'100px'
+		}
 		if(loading){
 			return(		
             
-				<div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+				<div className="lds-ring" style={styleLoading}><div></div><div></div><div></div><div></div></div>
 				
 				)
 		}

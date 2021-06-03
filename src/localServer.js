@@ -34,6 +34,12 @@ const ServerLocal = (props)=>{
 		}
 		fetchApi();
 	},[loading]);
+	const styleLoading = {
+        display:'flex',
+        marginLeft:'auto',
+        marginRight:'auto',
+        marginTop:'100px'
+    }
 	
 	
 
@@ -42,7 +48,7 @@ const ServerLocal = (props)=>{
         
 			return(		
 				
-				<div className="lds-ring"><div></div><div></div><div></div><div></div></div>
+				<div className="lds-ring" style={styleLoading}><div></div><div></div><div></div><div></div></div>
 				
 				)}
 		else{

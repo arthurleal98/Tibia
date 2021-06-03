@@ -45,16 +45,13 @@ body{
 
 tr th{
    font-size: 16px;
-   border: 1px solid black !important;
     width: 150px;
 }
 
 tr td{
-    border: 1px solid black !important;
     width: 30px;
     padding:7px;
-    background-color: #424B54;
-    color: #D9D9D9;
+    color: #0a0606;
 }
 tbody> tr:nth-child(1)>th{
     top:0;
