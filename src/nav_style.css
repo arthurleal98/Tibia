@@ -1,0 +1,21 @@
+#nav-top{
+    background-color: #353535;
+    color: aliceblue !important;
+}
+#nav-top >div{
+    margin-left: 50px;
+    margin-right: 50px;
+    
+    display: flex;
+}
+#nav-top >div>a{
+    color: aliceblue !important;
+    font-size: large;
+
+}
+
+#navbarNavAltMarkup>div>a{
+    color: aliceblue !important;
+
+
+}

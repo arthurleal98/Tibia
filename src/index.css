@@ -1,0 +1,194 @@
+html{
+    height: 100%;
+}
+body::before{
+        background: linear-gradient(#D9D9D9,#284B63);
+        content: '';
+    position: fixed;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    margin:0;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    display: block;
+    z-index: -1;
+    top:0;
+    left: 0;
+
+}
+body{
+    background-repeat: no-repeat;
+     width: 100%;
+     color:white;
+         position: absolute;
+    width: 100%;
+    height: 100%;
+
+     
+}
+
+#root{
+    width: 100%;
+    height: 100%;
+}
+#root > div{
+    padding-bottom: 200px;
+    color:#284B63;
+    margin-bottom: auto;
+    
+}
+#nav-top{
+        background-color: #424B54;
+}
+
+tr th{
+   font-size: 16px;
+   border: 1px solid black !important;
+    width: 150px;
+}
+
+tr td{
+    border: 1px solid black !important;
+    width: 30px;
+    padding:7px;
+    background-color: #424B54;
+    color: #D9D9D9;
+}
+tbody> tr:nth-child(1)>th{
+    top:0;
+  position: sticky;
+}
+.server_status{
+    
+    
+
+    padding-left: 20px;
+    padding-right: 20px;
+    align-items: center;
+    padding-bottom: 20px;
+
+}
+#graphics>div:nth-child(1){
+    margin-left: auto;
+    width: 50%;
+
+}#graphics>div:nth-child(2){
+    margin-right: auto;
+    width: 25%;
+    
+}
+rect{
+    opacity: 0;
+}
+#most_played,#least_played, #allplayers{
+    font-size: 15px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+#div-canvas > div>div{
+    margin-left: auto;
+    margin-right: auto;
+}
+#div-canvas{
+    max-width: 600px;
+    min-width: 300px;
+    min-height: 350px;
+    
+    margin-left: auto;
+    margin-right: auto;
+}
+#graphics{
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 100px;
+    width: 100%;
+    display: flex;
+    padding: 50px;
+    text-align: center;
+}
+tbody{
+    border-radius: 20px;
+}
+#all_status{
+    height: auto;
+    width: 70%;
+    text-align: center;
+    
+    border-radius: 40px;
+    padding-bottom: 30px;
+    padding-top: 1px;
+
+}
+.all_servers{
+    margin-top: 50px;
+    padding:30px;
+    padding-top: 0;
+    width: 100%;
+    
+    background-color: #FFFFFF;
+    border-radius: 40px;
+    margin-left: auto;
+    margin-right: auto;
+}
+#status-es{
+    margin-left: auto;
+    margin-right: auto;
+}
+.all_servers > div{
+    overflow-y: scroll;
+    height: 300px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    
+}
+
+footer{
+    bottom: 0;
+    width: 100%;
+    margin-top: 200px;
+    position: absolute;
+    background-color: #353535;
+}
+@media only screen and (max-width:1200px){
+    #div-canvas{
+        width: 100%;
+        height: 100%;
+    }
+    .server_status{
+        display: block;
+    }
+    #all_status{
+        width: 80% ;
+    }
+    .all_servers{
+        width: 100%;
+    }
+    
+    #graphics{
+        display: block;
+        
+    }
+    #graphics>div:nth-child(1){
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 50px;
+        width: 100%;
+    
+    }#graphics>div:nth-child(2){
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        height: 100%;
+        font-size: 10px !important;
+        
+    }
+}
+@media screen and (max-width:1000px){
+    #status-es{
+        font-size:10px !important;
+    }
+    
+}
