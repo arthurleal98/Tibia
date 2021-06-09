@@ -1,6 +1,6 @@
 const Player = ()=>{
     return(
-        <div>Tsteadasdas</div>
+        <div><h1>Constução em andamento!</h1></div>
     )
 };
 export default Player;

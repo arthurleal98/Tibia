@@ -25,13 +25,24 @@ const ServerStatus = ()=>{
 
         const fetchApi = async()=>{
             try{
-                const styleButton={
-                    width:'100%'
-                }
-                const styleTh={
-                    width:100
-                }
+                
+                
+                const colorTr = {
+                    backgroundColor:' #e1e7f0'
 
+                }
+                const colorTr2 = {
+                    backgroundColor:' #c1cfe3',
+                }
+                const styleThead={
+                    backgroundColor:'#03256c',
+                    padding:'20px 1s0px 20px 10px',
+                    color:'white',
+                    fontSize:'20px',
+                    paddingLeft:100,
+                    paddingRight:100
+
+                }
                 const response = await fetch('https://api.tibiadata.com/v2/worlds.json');
                 const data = await response.json();
                 const dados = data.worlds.allworlds;
@@ -40,7 +51,7 @@ const ServerStatus = ()=>{
                 const headers = Object.keys(dados[0]);
                 headers.pop();
                 let content_tr = []
-                pip.forEach(element=>{
+                pip.forEach((element, index)=>{
                     let array = [];
                     let key2 = '';
                     headers.forEach((element2,i)=>{
@@ -48,21 +59,27 @@ const ServerStatus = ()=>{
                             key2=element[element2]
                             array.push(<td key={key2}><Link to ={location=>`Server?value=${element[element2]}`}>{element[element2]}</Link></td>)
                         }
-                        else if(i===4 && element[element2].length<=2){                            
-                            array.push(<td key={key2+element2}>None</td>)
-                        }
+                        
                         else{
                             array.push(<td key={key2+element2}>{ element[element2]}</td>)
 
                         }
                         
                     })
-                    content_tr.push(<tr key={key2}>{array}</tr>)
+                    if( index ===0){
+                        content_tr.push(<tr style={colorTr} key={`${element}_${index}`}>{array}</tr>);
+                    }
+                    else if (index%2!==0){
+                        content_tr.push(<tr style={colorTr2} key={`${element}_${index}`}>{array}</tr>);
+                    }
+                    else{
+                        content_tr.push(<tr style ={colorTr} key={`${element}_${index}`}>{array}</tr>);
+                    }
                 });
                 setContent_table(content_tr);
                 let header_tr=[];
                 headers.forEach((element2,i)=>{
-                    header_tr.push(<th key={element2+'header'} style={styleTh}><button style={styleButton} onClick={()=>sorting(element2,1)}>{element2[0].toUpperCase()+element2.slice(1)}</button></th>)
+                    header_tr.push(<th key={element2+'header'} style={styleThead} onClick={()=>sorting(element2,1)}>{element2[0].toUpperCase()+element2.slice(1)}</th>)
                 });
                 setHeader_table(header_tr)
 
@@ -106,7 +123,7 @@ const ServerStatus = ()=>{
         else{
             return(
 
-                <div className='server_status' className=''>
+                <div className='server_status' >
            
                   <div className='all_servers' >
                     <h4 style={styleH}>Lista de todos os servers</h4>

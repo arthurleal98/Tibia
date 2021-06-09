@@ -5,6 +5,7 @@ body::before{
         background: linear-gradient(#D9D9D9,#284B63);
         content: '';
     position: fixed;
+
     background-size: cover;
     background-position: center;
     width: 100%;
@@ -19,8 +20,9 @@ body::before{
 
 }
 body{
+        min-height: 100vh;
+
     background-repeat: no-repeat;
-     width: 100%;
      color:white;
          position: absolute;
     width: 100%;
@@ -145,8 +147,7 @@ tbody{
 footer{
     bottom: 0;
     width: 100%;
-    margin-top: 200px;
-    position: absolute;
+    position: relative;
     background-color: #353535;
 }
 @media only screen and (max-width:1200px){

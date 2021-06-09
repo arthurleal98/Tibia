@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import quickSort from './quickSort';
+import { Link } from 'react-router-dom';
+
 import './table_style.css';
 
 const Table = (props)=>{
@@ -54,7 +56,7 @@ const Table = (props)=>{
                     arr.push(element['name'])
                 })
                 let option_c = [];
-                option_c.push(<option key={"null_option_page2_"} value=" ">Escolha o server</option>)
+                option_c.push(<option key={"null_option_page2_"} value=" ">-----------</option>)
                 arr.forEach(element=>{
                     option_c.push(<option key={`null_option_page2_${element}`} value={element}>{element}</option>)
                 })
@@ -66,18 +68,23 @@ const Table = (props)=>{
                     setNameServer(data[0][label[2]]);
                     delete label[2];
                     const pip = quickSort(data,0,49,type[0],type[1]);
-                    let r = pip['rank'];
-                    console.log(pip[0])
                     const arrayLabels = [];
                     label.forEach(element => {
-                        arrayLabels.push(<th key={`table_button_${element}_page2`} style={styleThead}  onClick={()=>{sorting(element)}}>{element}</th>)
+                        arrayLabels.push(<th key={`table_button_${element}_page2`} style={styleThead}  onClick={()=>{sorting(element)}}>{element[0].toUpperCase()+element.slice(1)}</th>)
                     });
                     setLabelstable(<tr key={'table_button_header_page2'}>{arrayLabels}</tr>);
                     const arrayContent = [];
                     pip.forEach((element,index)=>{
                         let arr = [];
-                        label.forEach(element2=>{
-                            arr.push(<td key={`${element}_${index}_${element2}`} style={styleTd}>{element[element2]}</td>)
+                        label.forEach((element2,index2)=>{
+                            if(index2===0){
+                                arr.push(<td key={`${element}_${index}_${element2}`} style={styleTd}><Link to ={location=>`Player?value=${element[element2]}`}>{element[element2]} </Link></td>)
+
+                            }
+                            else{
+                                 arr.push(<td key={`${element}_${index}_${element2}`} style={styleTd}>{element[element2]}</td>)
+
+                            }
                         })
                         if( index ===0){
                             arrayContent.push(<tr style={colorTr} key={`${element}_${index}`}>{arr}</tr>);
@@ -133,8 +140,15 @@ const Table = (props)=>{
         
     }
     const styleForm = {
-        marginTop:1,
-        marginBottom:30
+        marginTop:30,
+        marginBottom:30,
+        display:'flex',
+        justifyContent:'center'
+    }
+    const styleLabel = {
+        alignSelf:'center',
+        fontSize:'1.1rem',
+        marginRight:12
     }
     const styleH = {
         marginTop:30
@@ -150,7 +164,22 @@ const Table = (props)=>{
         marginRight:'auto',
         marginTop:'100px'
     }
-    if(loading){
+    const styleSelect={
+       
+        width:130
+    }
+    const buttons = [<div style={stylePag} >
+        <ul className="pagination"style={stylePag} key={'button_ul'}>
+        <li className="page-item" key={'button_ul1'}><button className='page-link'onClick={()=>{setPagination(50)}} >First</button></li>
+
+            <li className="page-item" key={'button_ul2'}><button className='page-link'onClick={()=>{indexLess()}} >Previous</button></li>
+            
+            <li className="page-item" key={'button_ul3'}><button className='page-link'onClick={()=>{indexPlus()}} >Next</button></li>
+            <li className="page-item"key={'button_ul4'}><button className='page-link'onClick={()=>{setPagination(props.index+1)}} >Last</button></li>
+
+        </ul>
+    </div>]
+    if(loading ){
             
         
         return(		
@@ -163,9 +192,10 @@ const Table = (props)=>{
             <div style={styleMain}>
                     
                     <h1 style={styleH}>{nameServer}</h1>
+                    
                     <form action='/Server' method='get' style={styleForm}>
-                        <label>Escolha o server: </label>
-                        <select name='value' id='value'>
+                        <label style={styleLabel}>Escolha um server: </label><br></br>
+                        <select name='value' id='value' style={styleSelect} className='form-select'>
                             {options}
                             
                         </select>
@@ -174,27 +204,19 @@ const Table = (props)=>{
                     </form>
                     
                 <div id='div_table_players'>
-                    <table style={styleTable}>
-                        <thead >
-                            {labelstable}
-                        </thead>
-                        <tbody>
-                            
-                            {contentTable}
-                        </tbody>
-                    </table>
+                    <div>
+                        <table style={styleTable}>
+                            <thead >
+                                {labelstable}
+                            </thead>
+                            <tbody>
+                                
+                                {contentTable}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-                <div style={stylePag} >
-                    <ul className="pagination"style={stylePag} >
-                    <li className="page-item"><button className='page-link'onClick={()=>{setPagination(50)}} >Initial</button></li>
-
-                        <li className="page-item"><button className='page-link'onClick={()=>{indexLess()}} >Previous</button></li>
-                        
-                        <li className="page-item"><button className='page-link'onClick={()=>{indexPlus()}} >Next</button></li>
-                        <li className="page-item"><button className='page-link'onClick={()=>{setPagination(props.index+1)}} >End</button></li>
-
-                    </ul>
-                </div>
+                {contentTable.length>0?buttons:<div></div>}
                 
 
 

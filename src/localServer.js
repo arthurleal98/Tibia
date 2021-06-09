@@ -25,7 +25,7 @@ const ServerLocal = (props)=>{
 					setDados(data['highscores']['data']);				
 			}
 			catch(e){
-				console.log(e)
+				console.log('Sem acesso à API')
 			}
 			finally{
                 setLoading(false);     
