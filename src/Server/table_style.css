@@ -1,0 +1,17 @@
+#div_table_players{
+    margin-left: 2em;
+    margin-right: 2em;
+}
+#div_table_players>div{
+    
+    overflow-x: auto;
+}
+
+.teste:hover{
+    background-color: rgb(93, 53, 187) !important;
+
+}
+
+.tr_table:hover{
+    background-color: white !important;
+}
