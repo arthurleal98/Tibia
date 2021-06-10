@@ -1,5 +1,5 @@
 import Chart from "react-apexcharts";
-import quickSort from './quickSort';
+import quickSort from '../Utility/quickSort';
 import React, { useState, useEffect } from 'react';
 
 

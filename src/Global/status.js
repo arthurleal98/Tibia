@@ -9,7 +9,7 @@ const StatusGlobal= ()=>{
     return(
     <div>
       <div id='graphics'>
-          <Graph  titulo={'Top 10 mais jogados'}/>
+          <Graph  titulo={'Servers mais jogados'}/>
           <GraphPie titulo={'Jogadores por região'}/>
       </div>
       <div id='all_status' className='container'>

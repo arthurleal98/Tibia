@@ -8,11 +8,11 @@ import {
   Route,
   
 } from "react-router-dom";
-import ServerLocal from './localServer';
-import Home from './home';
-import Navbar from './navBar';
-import SecondPage from './second_page';
-import Player from './Players';
+import ServerLocal from './Server/localServer';
+import Home from './Home/home';
+import Navbar from './Navbar/navBar';
+import SecondPage from './Global/second_page';
+import Player from './Players/Players';
 
 class App extends React.Component{
   
