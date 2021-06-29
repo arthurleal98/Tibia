@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import quickSort from '../Utility/quickSort';
 import './server_status.css';
 const ServerStatus = ()=>{
@@ -8,6 +8,7 @@ const ServerStatus = ()=>{
     const [loading,setLoading] = useState(true);
     const [content_table,setContent_table] = useState([]);
     const [header_table, setHeader_table] = useState([]);
+    const location = useLocation();
     
     useEffect(()=>{
         const sorting= (element)=>{
@@ -51,13 +52,16 @@ const ServerStatus = ()=>{
                 const headers = Object.keys(dados[0]);
                 headers.pop();
                 let content_tr = []
+                const styleLink ={
+                    textDecoration:'none'
+                }
                 pip.forEach((element, index)=>{
                     let array = [];
                     let key2 = '';
                     headers.forEach((element2,i)=>{
                         if(i===0){
                             key2=element[element2]
-                            array.push(<td key={key2}><Link to ={location=>`Server?value=${element[element2]}`}>{element[element2]}</Link></td>)
+                            array.push(<td key={key2}><Link to ={location=>`Server?value=${element[element2]}`} style={styleLink}>{element[element2]}</Link></td>)
                         }
                         
                         else{
@@ -101,7 +105,7 @@ const ServerStatus = ()=>{
 			marginLeft:'auto',
 			marginRight:'auto',
             fontSize:'14px',
-            width:'90%',
+            width:'100%',
         }
         const styleH={
             padding:'20px'
@@ -124,7 +128,8 @@ const ServerStatus = ()=>{
             return(
 
                 <div className='server_status' >
-           
+                       {console.log(location.pathname)}
+
                   <div className='all_servers' >
                     <h4 style={styleH}>Lista de todos os servers</h4>
                     <div>                    

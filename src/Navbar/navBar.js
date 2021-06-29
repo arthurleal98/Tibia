@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState, } from 'react';
+
 import './nav_style.css';
 import {
   Link
   
 } from "react-router-dom";
-class Navbar extends React.Component{
-    render(){
-      
+const Navbar = ()=>{
+    const [value,setValue]=useState('');
+    const styleForm = {
+      display:'flex'
+    }
+    
         return(
          
           <nav className="navbar navbar-expand-lg navbar-light " id='nav-top' >
@@ -22,10 +26,14 @@ class Navbar extends React.Component{
       <Link className="nav-link" to='/Player'>Player</Link>
       </div>
     </div>
+    <form class="form-inline my-2 my-lg-0" style={styleForm}>
+      <input className="form-control mr-sm-2" type="search" placeholder="Nome do Jogador" aria-label="Search" onChange={e=>setValue(e.target.value)}></input>
+      <Link to={`/Player/p=${value}`}><button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button></Link>
+    </form>
   </div>
 </nav>
         )
-    }
+    
 }
 
 export default Navbar;

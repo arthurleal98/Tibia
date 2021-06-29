@@ -34,16 +34,16 @@ const Table = (props)=>{
                 
                 const styleThead={
                     backgroundColor:'#03256c',
-                    padding:'20px 40px 20px 40px',
+                    padding:'20px 5vh 20px 5vh',
                     color:'white',
                     fontSize:'20px',
-                    paddingLeft:100,
-                    paddingRight:100
+                    
 
                 }
                
                 const styleTd = {
-                    padding:12
+                    padding:12,
+                    width:'10px !important'
                 }
                 const dados = data2.worlds.allworlds;
                 let arr = [];
@@ -79,7 +79,7 @@ const Table = (props)=>{
                         }
                         label.forEach((element2,index2)=>{
                             if(index2===0){
-                                arr.push(<td key={`${element['name']}_${index}_${element2}`} style={styleTd}><Link to ={location=>`Player?value=${element[element2]}`} style={styleLink}>{element[element2]} </Link></td>)
+                                arr.push(<td key={`${element['name']}_${index}_${element2}`} style={styleTd}><Link to ={`/Player/p=${element[element2]}`} style={styleLink}>{element[element2]} </Link></td>)
 
                             }
                             else{
@@ -161,7 +161,9 @@ const Table = (props)=>{
         marginRight:12
     }
     const styleH = {
-        marginTop:30
+        marginTop:30,
+        fontSize:'3rem',
+
 
     }
     const stylePag ={
@@ -203,7 +205,7 @@ const Table = (props)=>{
                     
                     <h1 style={styleH}>{nameServer}</h1>
                     
-                    <form action='/Server' method='get' style={styleForm}>
+                    <form action='/Server' method='get'  style={styleForm}>
                         <label style={styleLabel}>Escolha um server: </label><br></br>
                         <select name='value' id='value' style={styleSelect} className='form-select'>
                             {options}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect} from 'react';
+import { useLocation, useParams} from 'react-router-dom';
 
 import Table from './table';
 const ServerLocal = (props)=>{
@@ -8,7 +9,7 @@ const ServerLocal = (props)=>{
     
 	const [dados,setDados] = useState();
 	const [index,setIndex] = useState();
-    
+    const location = useLocation();
 	useEffect(()=>{
 		
 		const fetchApi = async()=>{
@@ -40,6 +41,7 @@ const ServerLocal = (props)=>{
         marginRight:'auto',
         marginTop:'100px'
     }
+	const rt = useParams()
 	
 	
 
@@ -47,12 +49,15 @@ const ServerLocal = (props)=>{
             
         
 			return(		
-				
-				<div className="lds-ring" style={styleLoading}><div></div><div></div><div></div><div></div></div>
+								
+
+				<div className="lds-ring" style={styleLoading}>{console.log(rt)}
+					<div></div><div></div><div></div><div></div></div>
 				
 				)}
 		else{
 			return (<div>
+				{console.log(location.search)}
 				<Table data={dados} index={index} />
 			</div>
 				

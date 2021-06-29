@@ -47,7 +47,7 @@ body{
 
 tr th{
    font-size: 16px;
-    width: 150px;
+    width: 10vh;
 }
 
 tr td{
@@ -55,6 +55,7 @@ tr td{
     padding:7px;
     color: #0a0606;
 }
+
 tbody> tr:nth-child(1)>th{
     top:0;
   position: sticky;
@@ -110,9 +111,29 @@ rect{
 tbody{
     border-radius: 20px;
 }
+.all_servers>div::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  
+
+  .all_servers>div::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 10px;
+  }
+   
+  .all_servers>div::-webkit-scrollbar-thumb {
+    background: rgb(70, 62, 62); 
+    border-radius: 10px;
+  }
+  
+  .all_servers>div::-webkit-scrollbar-thumb:hover {
+    background: #3f3b3b; 
+    
+  }
 #all_status{
     height: auto;
-    width: 70%;
+    width: 80%;
     text-align: center;
     
     border-radius: 40px;
@@ -129,8 +150,6 @@ tbody{
     
     background-color: #FFFFFF;
     border-radius: 40px;
-    margin-left: auto;
-    margin-right: auto;
 }
 #status-es{
     margin-left: auto;
@@ -153,6 +172,7 @@ footer{
     background-color: #353535;
 }
 @media only screen and (max-width:1200px){
+    
     #div-canvas{
         width: 100%;
         height: 100%;
@@ -161,7 +181,7 @@ footer{
         display: block;
     }
     #all_status{
-        width: 80% ;
+        width: 100% ;
     }
     .all_servers{
         width: 100%;

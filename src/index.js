@@ -13,6 +13,7 @@ import Home from './Home/home';
 import Navbar from './Navbar/navBar';
 import SecondPage from './Global/second_page';
 import Player from './Players/Players';
+import HomePlayer from './Players/PlayerHome';
 
 class App extends React.Component{
   
@@ -28,9 +29,13 @@ class App extends React.Component{
           <Route path='/Server'>
             <ServerLocal/>
           </Route>
-          <Route path="/Player">
+          <Route path="/Player/:id">
             <Player/>
           </Route>
+          <Route path="/Player">
+            <HomePlayer/>
+          </Route>
+
           <Route path='/'>
             <Home/>
           </Route>

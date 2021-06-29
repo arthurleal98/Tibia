@@ -12,7 +12,7 @@ const StatusGlobal= ()=>{
           <Graph  titulo={'Servers mais jogados'}/>
           <GraphPie titulo={'Jogadores por região'}/>
       </div>
-      <div id='all_status' className='container'>
+      <div id='all_status' className='container-fluid'>
           
         <ServerStatus/>
         
