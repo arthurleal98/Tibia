@@ -22,8 +22,8 @@ const Navbar = ()=>{
                   <Link className="nav-link" to='/Player'>Player</Link>
                 </div>
                 <form className="d-flex " >
-                  <input className="form-control me-2" type="search" placeholder="Nome do Jogador" aria-label="Search" onChange={e=>setValue(e.target.value)}></input>
-                  <Link to={`/Player/${value}`}><button className="btn btn-outline-success" type="submit">Search</button></Link>
+                  <input className="form-control me-2" type="search" placeholder="Nome do Jogador" aria-label="Search" onChange={e=>{setValue(e.target.value)}}></input>
+                  <button className="btn btn-outline-success" type="submit"><Link to={`/Player/${value}`}>Search</Link></button>
                 </form>
               </div>
           
