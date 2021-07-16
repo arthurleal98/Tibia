@@ -34,7 +34,7 @@ const Table = (props)=>{
                 
                 const styleThead={
                     backgroundColor:'#03256c',
-                    padding:'20px 5vh 20px 5vh',
+                    padding:'20px 10vh 20px 10vh',
                     color:'white',
                     fontSize:'20px',
                     
@@ -43,7 +43,8 @@ const Table = (props)=>{
                
                 const styleTd = {
                     padding:12,
-                    width:'10px !important'
+                    width:'10px !important',
+                    transition:'0s'
                 }
                 const dados = data2.worlds.allworlds;
                 let arr = [];
@@ -62,13 +63,14 @@ const Table = (props)=>{
                     
                     setNameServer(data[0][label[2]]);
                     delete label[2];
+                    console.log(data)
                     const pip = quickSort(data,0,49,type[0],type[1]);
                     const arrayLabels = [];
                     
                     label.forEach(element => {
                         let chave = `table_button_${element}_page2`
                         
-                        arrayLabels.push(<th key={chave} style={styleThead} className='teste' onClick={()=>{sorting(element)}}  id={chave}>{element[0].toUpperCase()+element.slice(1)}</th>)
+                        arrayLabels.push(<th key={chave} style={styleThead} className='teste' onClick={()=>{sorting(element)}} >{element[0].toUpperCase()+element.slice(1)}</th>)
                     });
                     setLabelstable(<tr key={'table_button_header_page2'}>{arrayLabels}</tr>);
                     const arrayContent = [];
@@ -79,7 +81,7 @@ const Table = (props)=>{
                         }
                         label.forEach((element2,index2)=>{
                             if(index2===0){
-                                arr.push(<td key={`${element['name']}_${index}_${element2}`} style={styleTd}><Link to ={`/Player/p=${element[element2]}`} style={styleLink}>{element[element2]} </Link></td>)
+                                arr.push(<td key={`${element['name']}_${index}_${element2}`} style={styleTd}><Link to ={`/Player/${element[element2]}`} style={styleLink}>{element[element2]} </Link></td>)
 
                             }
                             else{
@@ -205,15 +207,7 @@ const Table = (props)=>{
                     
                     <h1 style={styleH}>{nameServer}</h1>
                     
-                    <form action='/Server' method='get'  style={styleForm}>
-                        <label style={styleLabel}>Escolha um server: </label><br></br>
-                        <select name='value' id='value' style={styleSelect} className='form-select'>
-                            {options}
-                            
-                        </select>
-                        
-                        <button id='submit' className='btn btn-primary'>Ir</button>
-                    </form>
+                    
                     
                 <div id='div_table_players'>
                     <div>

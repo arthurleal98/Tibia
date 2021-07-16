@@ -6,12 +6,21 @@
     
     overflow-x: auto;
 }
-
-.teste:hover{
-    background-color: rgb(93, 53, 187) !important;
+.teste{
+    transition: all 0.2s ease 0s;
 
 }
+.teste:hover{
+    background-color: rgb(93, 53, 187) !important;
+    
+}
 
+.tr_table{
+    transition: all 0.2s ease 0s;
+
+}
 .tr_table:hover{
     background-color: white !important;
+    
+
 }

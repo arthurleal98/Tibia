@@ -6,16 +6,18 @@ const HomePlayer = ()=>{
         display:'flex',
         justifyContent:'center',
         alignItems:'center',
-        height:400,
         padding:0
     };
+    const teste =(e)=>{
+        e.preventDefaults();
+    }
     
     return(
         <div style={styleForm}>
-            <form >
-                <input  placeholder='Nome do Jogador' onChange={e=>setValue(e.target.value)}></input>
-                <Link to={`/Player/p=${value}`}><button type='submit'>asddasd</button></Link>
-            </form>
+            <form className="d-flex " onSubmit={teste}>
+                  <input className="form-control me-1" type="search" placeholder="Nome do Jogador" aria-label="Search" onChange={e=>setValue(e.target.value)} onSubmit={teste}></input>
+                  <Link to={`/Player/${value}`}><button className="btn btn-outline-success" type="submit" >Search</button></Link>
+                </form>
         </div>
     )
 }

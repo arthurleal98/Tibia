@@ -8,6 +8,7 @@ import {
   Route,
   
 } from "react-router-dom";
+import ServerHome from './Server/serverHome';
 import ServerLocal from './Server/localServer';
 import Home from './Home/home';
 import Navbar from './Navbar/navBar';
@@ -26,8 +27,12 @@ class App extends React.Component{
           <Route path="/Global">
             <SecondPage/>
           </Route>
-          <Route path='/Server'>
+          
+          <Route path='/Server/:id'>
             <ServerLocal/>
+          </Route>
+          <Route path='/Server'>
+            <ServerHome/>
           </Route>
           <Route path="/Player/:id">
             <Player/>

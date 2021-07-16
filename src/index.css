@@ -1,6 +1,7 @@
 html{
     height: 100%;
 }
+
 body::before{
         background: linear-gradient(#D9D9D9,#284B63);
         content: '';
@@ -20,11 +21,11 @@ body::before{
 
 }
 body{
-        min-height: 100vh;
+    min-height: 100vh;
 
     background-repeat: no-repeat;
-     color:white;
-         position: absolute;
+    color:white;
+    position: absolute;
     width: 100%;
     height: 100%;
 
@@ -72,11 +73,13 @@ tbody> tr:nth-child(1)>th{
 }
 #graphics>div:nth-child(1){
     margin-left: auto;
-    width: 50%;
+    margin-right: 50px;
+    padding-right:50px;
+
 
 }#graphics>div:nth-child(2){
     margin-right: auto;
-    width: 25%;
+
     
 }
 rect{
@@ -148,7 +151,8 @@ tbody{
     padding-top: 0;
     width: 100%;
     
-    background-color: #FFFFFF;
+    background-color: #e1e8ff;
+
     border-radius: 40px;
 }
 #status-es{

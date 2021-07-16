@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
 import { Route, Switch,useRouteMatch, useLocation  } from "react-router-dom";
 import Death from './tabs/Death';
-
-import TabBar from './tabs/tabbar';
+import Achievement from "./tabs/achievement";
+import { Link } from "react-router-dom";
+import HomePlayer from "./PlayerHome";
+import Data from "./tabs/data";
 const Player = ()=>{
     const [player, setPlayer] = useState('')
     const [trava, setTrava] = useState(true);
-    const [loading,setLoading] = useState(true)
+    const [loading,setLoading] = useState(true);
+    const [dados, setDados] =useState('');
     const location = useLocation();
-    const testando =(location.pathname.match(/(p=).+/g)[0].slice(2));
+
+    const route = useRouteMatch();
+    const testando =route.url.split('/')[2];
+    
     useEffect(()=>{
         
         const API = async()=>{
@@ -16,8 +22,9 @@ const Player = ()=>{
                 setPlayer(testando)
                 const response = await fetch(`https://api.tibiadata.com/v2/characters/${testando}.json`)
                 const data = await response.json();
-                console.log(data.characters)
+                setDados(data.characters)
                 console.log(Object.keys(data.characters))
+                
                 if(Object.keys(data.characters)[0]==='error'){
                     setTrava(false)
                 }
@@ -44,8 +51,29 @@ const Player = ()=>{
         marginTop:'100px'
     }
     const a = useRouteMatch().url
-    console.log(a)
-    console.log(location.search)
+    const styleMain = {
+        width:'60%',
+        marginLeft:'auto',
+        marginRight:'auto',
+        textAlign:'center',
+        marginTop:'100px'
+    }
+    const styleUl = {
+        display:'flex',
+        padding:'0px'
+    }
+    const styleTeste = {
+        backgroundColor:'red',
+        marginTop:'30px',
+        height:'300px'
+    }
+    const styleLi={
+        backgroundColor:'red',
+        
+    }
+    const styleLink={
+        width:'100%'
+    }
     if(loading){
         return(		
             
@@ -56,21 +84,34 @@ const Player = ()=>{
     else{
         if(trava){
             return(
-                <div>
-                    <h1>{player}</h1>
-                        <TabBar location={a}/>
+                <div style={styleMain}>
+                    <ul style={styleUl}>
+                        <li style={styleLi} className='teste col-4'><Link style={styleLink} to={`${a}`}>Data</Link></li>
 
-                        <Switch>
+                        <li style={styleLi} className='teste col-4'><Link style={styleLink} to={`${a}/Death`}>Death</Link></li>
+                        <li  style={styleLi} className='teste col-4'><Link style={styleLink} to={`${a}/Achievement`}>Achievement</Link></li>
+                    </ul>
+                    <div style={styleTeste}>
+                        <Switch >  
+                            <Route  exact path={`${a}/`}>
+                                <Data/>
+                            </Route>                          
                             <Route  path={`${a}/Death`}>
-                                <Death location = {a} />
+                                <Death dados={dados} />
+                            </Route>
+                            <Route path={`${a}/Achievement`}>
+                                <Achievement dados={dados}/>
                             </Route>                            
                         </Switch>
+                    </div>
                 </div>)
             }
         else{
             return(
                 <div style={styleError}>
                     <h1>Jogador não encontrado</h1>
+                    <Link to={`/Player`}><button className="btn btn-primary" type="submit" >Voltar</button></Link>
+
                 </div>
             )
         }

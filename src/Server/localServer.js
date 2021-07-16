@@ -1,7 +1,8 @@
 import React, { useState, useEffect} from 'react';
-import { useLocation, useParams} from 'react-router-dom';
-
+import { useHistory, useLocation, useParams, useRouteMatch} from 'react-router-dom';
+import SelectServer from './selectserver';
 import Table from './table';
+import TableUtility from '../Utility/table';
 const ServerLocal = (props)=>{
 	
 	
@@ -10,12 +11,16 @@ const ServerLocal = (props)=>{
 	const [dados,setDados] = useState();
 	const [index,setIndex] = useState();
     const location = useLocation();
+	const history = useHistory()
+	const [route,setRoute] = useState(useRouteMatch().url.split("/")[2])
+	const routeMatch = useRouteMatch().url.split("/")[2]
+	console.log(routeMatch)
 	useEffect(()=>{
 		
 		const fetchApi = async()=>{
 
 			try{					
-					const url = `https://api.tibiadata.com/v2/highscores/${window.location.href.match(/([=])\w+/g)[0].slice(1)}.json`;
+					const url = `https://api.tibiadata.com/v2/highscores/${routeMatch}.json`;
 					const response = await fetch(url);
 					const data = await response.json();
 					let limit = 0;
@@ -34,7 +39,8 @@ const ServerLocal = (props)=>{
             }
 		}
 		fetchApi();
-	},[loading]);
+	},[loading,route,routeMatch]);
+	
 	const styleLoading = {
         display:'flex',
         marginLeft:'auto',
@@ -57,7 +63,7 @@ const ServerLocal = (props)=>{
 				)}
 		else{
 			return (<div>
-				{console.log(location.search)}
+				<SelectServer setRoute={setRoute} route={route}/>
 				<Table data={dados} index={index} />
 			</div>
 				
