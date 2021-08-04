@@ -1,8 +1,18 @@
-import TableUtility from "../../Utility/table";
+import TableUtility from "../../utility/table";
 const  Death = (props)=>{
-    const dados = props.dados.deaths
-    console.log(dados)
-    
+    const dados = props.dados.deaths;
+    const styleH1 = {
+        marginTop:20,
+        marginBottom:40
+    }
+    const styleMain={
+        display:'block',
+        marginBottom:'20px'
+    }
+    const styleContent ={
+        overflow:'auto',
+
+    }
     if(dados.length>0){
         const filtrado =[]
         dados.forEach(element => {
@@ -20,21 +30,22 @@ const  Death = (props)=>{
             filtrado.push(lista)
 
         });
-        console.log(filtrado)
         const labels = Object.keys(dados[0])
 
        
         return(
-            <div>
-                <h1>Deaths</h1>
-                <TableUtility dados={filtrado} label={labels}  columnLink={['involved']} destination={{'involved':'Player'}}/>
+            <div style={styleMain}>
+                <h1 style={styleH1}>Deaths</h1>
+                <div style={styleContent}>
+                    <TableUtility dados={filtrado} label={labels}  columnLink={['involved']} destination={{'involved':'Player'}}/>
+                </div>
 
             </div>
         )
     }
     else{return(
-        <div>
-            <h1>Não há Conquistas</h1>
+        <div style={styleMain}>
+            <h1 style={styleH1}>Não há registro de mortes</h1>
         </div>)
     }
 }

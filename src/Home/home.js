@@ -30,8 +30,8 @@ const Home = ()=>{
                     <h1 >Seja bem-vindo às estatísticas do Tibia.</h1>
                     <div >
                         <p>Vem simbora que tu vai ver a doideira desse site</p>
-                        <button className='btn btn-primary'><Link style={stylebutton}
-                        to='/Global'>Estatísticas</Link></button>
+                        <Link style={stylebutton}
+                        to='/Global' className='btn btn-primary'>Estatísticas</Link>
                     </div>
 
                 </div>

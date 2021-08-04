@@ -1,6 +1,8 @@
 #div_table_players{
     margin-left: 2em;
     margin-right: 2em;
+    padding-bottom: 1em;
+    overflow: auto;
 }
 #div_table_players>div{
     

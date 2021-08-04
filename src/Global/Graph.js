@@ -1,5 +1,5 @@
 import Chart from "react-apexcharts";
-import quickSort from '../Utility/quickSort';
+import quickSort from '../utility/quickSort';
 import React, { useState, useEffect} from 'react';
 
 
@@ -64,7 +64,7 @@ const Graph = (props)=>{
 				dataLabels: {
 				  position: 'bottom'
 				},
-			  }
+			  },
 			},
 			
 			dataLabels: {
@@ -81,14 +81,20 @@ const Graph = (props)=>{
 			},
 			stroke: {
 			  width: 1,
-			  colors: ['#fff']
+			  colors: ['#aeb4b8']
 			},
 			xaxis: {
 			  categories: labels,
+			  labels:{style:{
+				colors:['#aeb4b8']
+			}}
+			  
+			  
 			},
 			yaxis: {
 			  labels: {
-				show: false
+				show: false,
+				
 			  }
 			},
 			
@@ -130,7 +136,7 @@ const Graph = (props)=>{
 						series={state.series}
 						type="bar"
 						width="100%"
-						height='100%'
+						height='80%'
 					/>
 						</div>
 			</div>	

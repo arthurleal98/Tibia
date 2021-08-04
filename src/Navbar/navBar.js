@@ -1,12 +1,28 @@
-import React, { useState, } from 'react';
+import React, {  useState, } from 'react';
 
 import './nav_style.css';
 import {
-  Link,
+  Link, useHistory,
   
 } from "react-router-dom";
 const Navbar = ()=>{
-    const [value,setValue]=useState('');   
+    const [value,setValue]=useState(''); 
+    const history = useHistory();
+    const onEnter = (e)=>{
+      const destination = `/Player/${value}`
+      if (e.key=== 'Enter') {            
+          history.push(destination);
+          setValue('');
+          document.getElementById('input_nav').value = '';
+        }
+
+    
+    } 
+    const sbmit =()=> {
+        document.getElementById('input_nav').value = '';
+        setValue('');
+
+    }
         return(
          
           <nav className="navbar navbar-expand-lg navbar-light " id='nav-top' >
@@ -21,10 +37,10 @@ const Navbar = ()=>{
                   <Link className="nav-link" to='/Server'>Server</Link>
                   <Link className="nav-link" to='/Player'>Player</Link>
                 </div>
-                <form className="d-flex " >
-                  <input className="form-control me-2" type="search" placeholder="Nome do Jogador" aria-label="Search" onChange={e=>{setValue(e.target.value)}}></input>
-                  <button className="btn btn-outline-success" type="submit"><Link to={`/Player/${value}`}>Search</Link></button>
-                </form>
+                <div className="d-flex " >
+                  <input className="form-control me-2" id='input_nav' type="text" onKeyDown={(event)=>{onEnter(event)}} placeholder="Nome do Jogador" aria-label="Search" onChange={e=>{setValue(e.target.value)}} ></input>
+                  <Link to={`/Player/${value}`} className="btn btn-outline-success" onClick={()=>{sbmit()}}>Search</Link>
+                </div>
               </div>
           
             </div>

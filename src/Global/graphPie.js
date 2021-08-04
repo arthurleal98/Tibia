@@ -1,5 +1,5 @@
 import Chart from "react-apexcharts";
-import quickSort from '../Utility/quickSort';
+import quickSort from '../utility/quickSort';
 import React, { useState, useEffect } from 'react';
 
 
@@ -71,8 +71,10 @@ const GraphPie = (props) => {
                     offsetX: 0,
                     offsetY: 0,
                     customScale: 1,
+                    
                     dataLabels: {
-                        position: 'bottom'
+                        position: 'bottom',
+                        colors:['#aeb4b8']
                     },
                     donut: {
                         size: '65%',
@@ -84,7 +86,7 @@ const GraphPie = (props) => {
                                 fontSize: '22px',
                                 fontFamily: 'Helvetica, Arial, sans-serif',
                                 fontWeight: 600,
-                                color: undefined,
+                                color: '#aeb4b8',
                                 offsetY: -10,
                                 formatter: function(val) {
                                     return val
@@ -95,7 +97,7 @@ const GraphPie = (props) => {
                                 fontSize: '22px',
                                 fontFamily: 'Helvetica, Arial, sans-serif',
                                 fontWeight: 400,
-                                color: undefined,
+                                color: '#aeb4b8',
                                 offsetY: 16,
                                 formatter: function(val) {
                                     return val
@@ -108,7 +110,7 @@ const GraphPie = (props) => {
                                 fontSize: '22px',
                                 fontFamily: 'Helvetica, Arial, sans-serif',
                                 fontWeight: 600,
-                                color: '#373d3f',
+                                color: '#aeb4b8',
                                 formatter: function(w) {
                                     return w.globals.seriesTotals.reduce((a, b) => {
                                         return a + b
@@ -123,7 +125,15 @@ const GraphPie = (props) => {
                 type: 'donut',
             },
             labels: labels,
-            legend: { position: 'bottom' }
+            legend: { position: 'bottom',
+            labels: {
+                colors: '#aeb4b8',
+                useSeriesColors: false
+            },
+            },
+            color: '#aeb4b8',
+
+           
         },
 
 
@@ -158,7 +168,7 @@ const GraphPie = (props) => {
                         series = { state.series }
                         type = "donut"
                         width = "100%"
-                        height = '400px' />
+                        height = '90%' />
                     </div>
             </div>
 

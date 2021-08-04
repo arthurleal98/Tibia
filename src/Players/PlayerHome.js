@@ -1,23 +1,37 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 const HomePlayer = ()=>{
     const [value,setValue] = useState('');
     const styleForm = {
-        display:'flex',
-        justifyContent:'center',
-        alignItems:'center',
-        padding:0
+        padding:0,
+        marginTop:50
     };
-    const teste =(e)=>{
-        e.preventDefaults();
-    }
+    const styleInput = {
+        display:'flex',
+        justifyContent:'center'
+
+    };
+    const styleH1={
+        textAlign:'center'
+    };
+    const history = useHistory();
+    const teste2 = (e)=>{
+        const destination = `/Player/${value}`
+        if (e.key=== 'Enter') {            
+            history.push(destination);
+          }
+    };
     
+
     return(
         <div style={styleForm}>
-            <form className="d-flex " onSubmit={teste}>
-                  <input className="form-control me-1" type="search" placeholder="Nome do Jogador" aria-label="Search" onChange={e=>setValue(e.target.value)} onSubmit={teste}></input>
-                  <button className="btn btn-outline-success" type="submit" ><Link to={`/Player/${value}`}>Search</Link></button>
-                </form>
+            <h1 style={styleH1}>Player</h1>
+            <div style={styleInput}>            
+                <div className="d-flex " >
+                    <input className="form-control me-1"  id='input_Player' type="text" onKeyDown={(event)=>{teste2(event)}} placeholder="Nome do Jogador" aria-label="Search" onChange={e=>{setValue(e.target.value)}}></input>
+                    <Link to={`/Player/${value}`} className="btn btn-outline-success" >Search</Link>
+                </div>
+            </div>
         </div>
     )
 }

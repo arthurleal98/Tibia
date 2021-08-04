@@ -1,8 +1,7 @@
 import React, { useState, useEffect} from 'react';
-import { useHistory, useLocation, useParams, useRouteMatch} from 'react-router-dom';
+import {  useParams, useRouteMatch} from 'react-router-dom';
 import SelectServer from './selectserver';
-import Table from './table';
-import TableUtility from '../Utility/table';
+import TablePlayers from './table_players_server';
 const ServerLocal = (props)=>{
 	
 	
@@ -10,15 +9,12 @@ const ServerLocal = (props)=>{
     
 	const [dados,setDados] = useState();
 	const [index,setIndex] = useState();
-    const location = useLocation();
-	const history = useHistory()
+    
 	const [route,setRoute] = useState(useRouteMatch().url.split("/")[2])
 	const routeMatch = useRouteMatch().url.split("/")[2]
-	console.log(routeMatch)
 	useEffect(()=>{
 		
 		const fetchApi = async()=>{
-
 			try{					
 					const url = `https://api.tibiadata.com/v2/highscores/${routeMatch}.json`;
 					const response = await fetch(url);
@@ -47,26 +43,32 @@ const ServerLocal = (props)=>{
         marginRight:'auto',
         marginTop:'100px'
     }
-	const rt = useParams()
-	
-	
+	const styleMain = {
+		margin:'100px 100px 5em 5em',		
+		borderRadius:'40px',
+		marginBottom:'100px',
+		display:'block',
+		
+ 
 
+	}
+	const rt = useParams();
 		if(loading){
             
         
-			return(		
-								
-
+			return(
 				<div className="lds-ring" style={styleLoading}>{console.log(rt)}
 					<div></div><div></div><div></div><div></div></div>
-				
 				)}
 		else{
-			return (<div>
-				<SelectServer setRoute={setRoute} route={route}/>
-				<Table data={dados} index={index} />
-			</div>
-				
+			return (
+				<div>
+					<div style={styleMain}>
+						<SelectServer setRoute={setRoute} route={route}/>
+						<TablePlayers data={dados} index={index} />
+					</div>
+				</div>
+								
 			);}
 	}
 

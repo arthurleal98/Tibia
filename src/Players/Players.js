@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
-import { Route, Switch,useRouteMatch, useLocation  } from "react-router-dom";
-import Death from './tabs/Death';
+import { Route, Switch,useHistory,useRouteMatch} from "react-router-dom";
+import Death from './tabs/death';
 import Achievement from "./tabs/achievement";
 import { Link } from "react-router-dom";
-import HomePlayer from "./PlayerHome";
 import Data from "./tabs/data";
 const Player = ()=>{
     const [player, setPlayer] = useState('')
     const [trava, setTrava] = useState(true);
     const [loading,setLoading] = useState(true);
     const [dados, setDados] =useState('');
-    const location = useLocation();
 
     const route = useRouteMatch();
     const testando =route.url.split('/')[2];
@@ -39,41 +37,80 @@ const Player = ()=>{
             }
         }
         API();
-    },[testando])
+    },[testando]);
+    const a = useRouteMatch().url;
+
     const styleLoading = {
         display:'flex',
         marginLeft:'auto',
         marginRight:'auto',
-        marginTop:'100px'
+        marginTop:'100px',
+
     }
     const styleError={
         textAlign:'center',
         marginTop:'100px'
     }
-    const a = useRouteMatch().url
-    const styleMain = {
-        width:'60%',
+    const styleMain={
+        width:'90%',
+        height:'100%',
         marginLeft:'auto',
         marginRight:'auto',
         textAlign:'center',
-        marginTop:'100px'
+        marginTop:'50px',
+        marginBottom:'100px',
     }
     const styleUl = {
         display:'flex',
-        padding:'0px'
+        padding:'0px',
+        justifyContent:'center',
+        width:'100%',
+        height:60
     }
-    const styleTeste = {
-        backgroundColor:'red',
-        marginTop:'30px',
-        height:'300px'
-    }
+    
     const styleLi={
-        backgroundColor:'red',
+        backgroundColor:'#548CA8', 
+        width:'100%',
+        height:'100%',
+        display:'flex',
+        alignItems:'center',
+        justifyContent:'center',
+        
+
         
     }
     const styleLink={
-        width:'100%'
+        color:'white',
+        fontSize:'20px',
+        backgroundColor:'#A2DBFA',
+        display:'block',
+        textDecoration:'none',
+        width:'100%',
+
     }
+    const styleInfo ={
+        marginTop:'40px',
+        paddingBottom:20,
+        marginLeft:40,
+        marginRight:40
+
+    }
+    const styleContents={
+        margin:'5em',
+        display:'block',
+        paddingTop:50,
+        paddingBottom:50,
+        height:'100%',
+        backgroundColor:'#334257',
+
+
+    }
+    const styleDivModal = {
+        backgroundColor:'#476072',
+        margin:'20px 100px 20px 100px',
+
+    }
+    const history = useHistory();
     if(loading){
         return(		
             
@@ -84,36 +121,49 @@ const Player = ()=>{
     else{
         if(trava){
             return(
-                <div style={styleMain}>
-                    <ul style={styleUl}>
-                        <li style={styleLi} className='teste col-4'><Link style={styleLink} to={`${a}`}>Data</Link></li>
-
-                        <li style={styleLi} className='teste col-4'><Link style={styleLink} to={`${a}/Death`}>Death</Link></li>
-                        <li  style={styleLi} className='teste col-4'><Link style={styleLink} to={`${a}/Achievement`}>Achievement</Link></li>
-                    </ul>
-                    <div style={styleTeste}>
-                        <Switch >  
-                            <Route  exact path={`${a}/`}>
-                                <Data/>
-                            </Route>                          
-                            <Route  path={`${a}/Death`}>
-                                <Death dados={dados} />
-                            </Route>
-                            <Route path={`${a}/Achievement`}>
-                                <Achievement dados={dados}/>
-                            </Route>                            
-                        </Switch>
+                <div style={styleMain} >
+                    <div style={styleContents}>
+                            <h1 className='mb-4'>{player}</h1>
+                    <div style={styleDivModal}>
+                            <ul style={styleUl}>
+                                <Link style={styleLink} to={`${a}`}><li style={styleLi} className='teste'>Data</li></Link>
+                                <Link style={styleLink} to={`${a}/Death`}><li style={styleLi} className='teste'>Death</li></Link>
+                                <Link style={styleLink} to={`${a}/Achievement`}><li style={styleLi} className='teste'>Achievement</li></Link>
+                            </ul>
+                            <div style={styleInfo}>
+                                <Switch >  
+                                    <Route  exact path={`${a}/`}>
+                                        <Data dados={dados}/>
+                                    </Route>                          
+                                    <Route  path={`${a}/Death`}>
+                                        <Death dados={dados} />
+                                    </Route>
+                                    <Route path={`${a}/Achievement`}>
+                                        <Achievement dados={dados}/>
+                                    </Route>                            
+                                </Switch>
+                            </div>
+                    </div>
                     </div>
                 </div>)
             }
         else{
+            
+            setTimeout(()=>{
+                history.push('/Player');
+                setTrava(true);   
+
+            },4000);
+            clearTimeout();
             return(
                 <div style={styleError}>
                     <h1>Jogador não encontrado</h1>
-                    <Link to={`/Player`}><button className="btn btn-primary" type="submit" >Voltar</button></Link>
-
+                    <h3>Verifique se o nome está correto, ou se o usuário existe!</h3>
+                    <div className="lds-ring" style={styleLoading}><div></div><div></div><div></div><div></div></div>
+                    <h6>Você está sendo redirecionado para pesquisar novamente</h6>
                 </div>
             )
+
         }
     }
     
