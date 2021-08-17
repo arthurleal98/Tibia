@@ -89,23 +89,23 @@ rect{
 tbody{
     border-radius: 20px;
 }
-.all_servers>div::-webkit-scrollbar {
+.scroll::-webkit-scrollbar {
     width: 10px;
     height: 10px;
   }
   
 
-  .all_servers>div::-webkit-scrollbar-track {
+  .scroll::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px grey; 
     border-radius: 10px;
   }
    
-  .all_servers>div::-webkit-scrollbar-thumb {
+  .scroll::-webkit-scrollbar-thumb {
     background: rgb(70, 62, 62); 
     border-radius: 10px;
   }
   
-  .all_servers>div::-webkit-scrollbar-thumb:hover {
+  .scroll::-webkit-scrollbar-thumb:hover {
     background: #3f3b3b; 
     
   }
@@ -146,9 +146,10 @@ tbody{
 }
 
 footer{
+    color:'white';
     bottom: 0;
     width: 100%;
-    background-color: #353535;
+    background-color: #4b4646;
     position: absolute;
 }
 @media only screen and (max-width:1200px){

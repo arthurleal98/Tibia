@@ -53,7 +53,7 @@ const ServerStatus = ()=>{
         else{
             return(
 
-                <div className='server_status' >
+                <div  >
                   <div className='all_servers' >
                     <h4 style={styleH}>Lista de todos os servers</h4>
                     <div>                    

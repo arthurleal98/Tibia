@@ -63,7 +63,7 @@ const ServerLocal = (props)=>{
 		else{
 			return (
 				<div>
-					<div style={styleMain}>
+					<div className='container'>
 						<SelectServer setRoute={setRoute} route={route}/>
 						<TablePlayers data={dados} index={index} />
 					</div>

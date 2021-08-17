@@ -1,8 +1,8 @@
 const Footer = ()=>{
     return(
-        <footer class="bg-light text-center text-lg-start">
+        <footer class=" text-center text-lg-start">
   <div className="text-center p-3" >
-    <a className="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    <a  href="https://github.com/arthurleal98" target='_blank'>Git Hub</a>
   </div>
 </footer>
     )

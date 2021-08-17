@@ -6,7 +6,6 @@ const Data = (props)=>{
     delete dados['former_names'];
     delete dados['comment']
     const [thead,setThead] = useState('');
-    const [tbody,setTbody] = useState('');
     const styleTable={
             marginLeft:'auto',
             marginRight:'auto',
@@ -24,9 +23,7 @@ const Data = (props)=>{
 
 
         }
-        const styleTitle={
-            backgroundColor:'yellow'
-        }
+        
         const styleContentTitle={
             backgroundColor:'#d3d7f2',
             color:'black',
@@ -86,7 +83,7 @@ const Data = (props)=>{
         }
 
         setThead(mainFunction(dados));
-    },[])
+    },[dados])
     const styleTeste = {
         overflow:'auto'
     }

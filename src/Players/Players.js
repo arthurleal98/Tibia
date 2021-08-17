@@ -51,11 +51,7 @@ const Player = ()=>{
         textAlign:'center',
         marginTop:'100px'
     }
-    const styleMain={
-        width:'90%',
-        height:'100%',
-        marginLeft:'auto',
-        marginRight:'auto',
+    const styleMain={       
         textAlign:'center',
         marginTop:'50px',
         marginBottom:'100px',
@@ -96,12 +92,10 @@ const Player = ()=>{
 
     }
     const styleContents={
-        margin:'5em',
         display:'block',
         paddingTop:50,
         paddingBottom:50,
         height:'100%',
-        backgroundColor:'#334257',
 
 
     }
@@ -121,16 +115,16 @@ const Player = ()=>{
     else{
         if(trava){
             return(
-                <div style={styleMain} >
+                <div style={styleMain} className='container'>
                     <div style={styleContents}>
                             <h1 className='mb-4'>{player}</h1>
                     <div style={styleDivModal}>
                             <ul style={styleUl}>
-                                <Link style={styleLink} to={`${a}`}><li style={styleLi} className='teste'>Data</li></Link>
+                                <Link style={styleLink} to={`${a}`}><li style={styleLi} className='teste'>Status</li></Link>
                                 <Link style={styleLink} to={`${a}/Death`}><li style={styleLi} className='teste'>Death</li></Link>
                                 <Link style={styleLink} to={`${a}/Achievement`}><li style={styleLi} className='teste'>Achievement</li></Link>
                             </ul>
-                            <div style={styleInfo}>
+                            <div style={styleInfo} >
                                 <Switch >  
                                     <Route  exact path={`${a}/`}>
                                         <Data dados={dados}/>

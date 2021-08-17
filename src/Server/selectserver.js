@@ -42,14 +42,13 @@ const SelectServer=(props)=>{
     }
     const styleDiv={
         display:'flex',
-        width:200
     }
     const styleDivMain={        
         height:100
     }
     return(<div style={styleDivMain}>
         <div style={styleMain} className='form-group'>
-            <h3 className='me-3'>Escolha um servidor:</h3>
+            <h3 className='me-3'>Servidores:</h3>
             <div style={styleDiv} >                
                 <select name='value' id='value'  className='form-select me-2' onChange={(e)=>{setSelected(e.target.value)}}>
                     {options}                                
